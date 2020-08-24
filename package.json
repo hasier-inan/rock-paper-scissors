@@ -1,0 +1,85 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-devtools": "^3.3.4",
+    "react-dom": "^16.4.2",
+    "react-router-dom": "^4.3.1",
+    "react-stomp": "^4.0.0",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.7"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch -d",
+    "start": "webpack-dev-server --hot --inline --port 3000 --config ./webpack.preview.config.js",
+    "test": "nyc --check-coverage --reporter=text mocha ./src/main/js/**/*.test.jsx --opts mocha.opts --timeout 5000 --recursive --require ignore-styles ./src/main/js/setup.test.jsx --exit",
+    "report": "nyc report --reporter=html --reporter=lcov"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-stage-2": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "autoprefixer": "^9.1.3",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-enzyme": "^1.0.0-beta.1",
+    "classnames": "^2.2.5",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^1.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.4.0",
+    "ignore-styles": "^5.0.1",
+    "jsdom": "^12.0.0",
+    "lodash-webpack-plugin": "^0.11.5",
+    "mini-css-extract-plugin": "^0.4.2",
+    "mocha": "^5.2.0",
+    "mocha-jsdom": "^2.0.0",
+    "node-sass": "^4.9.3",
+    "nyc": "^13.0.1",
+    "postcss-loader": "^3.0.0",
+    "prop-types": "^15.6.2",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^2.1.0",
+    "webpack-bundle-analyzer": "^3.4.1"
+  },
+  "nyc": {
+    "require": [
+      "@babel/register"
+    ],
+    "lines": 60,
+    "statements": 60,
+    "functions": 60,
+    "branches": 60,
+    "reporter": [
+      "lcov",
+      "html"
+    ],
+    "include": [
+      "src/main/js/**"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "src/main/js/**/*.test.jsx",
+      "src/main/js/**/*.test.js",
+      "src/main/js/**/test/**"
+    ],
+    "extension": [
+      ".jsx",
+      ".js"
+    ],
+    "temp-dir": "./target/istanbul-report-temp",
+    "report-dir": "./target/istanbul-report"
+  }
+}
