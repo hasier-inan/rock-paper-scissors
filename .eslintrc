@@ -1,0 +1,37 @@
+{
+  "plugins": [
+    "react"
+  ],
+  "settings": { "react": { "version" : "16.4.2" }},
+  "parser": "babel-eslint",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "rules": { //https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/
+    "sort-imports": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": true
+    }],
+    "no-extra-parens": 0,
+    "max-len": [1, 120, 4], //line length increased to 120
+    "max-params": [1, 4], //max allowed parameters in the method increased to 4
+    "react/jsx-max-depth": [2, {"max": 4}], //max depth increased to 4
+    "padded-blocks": 0, //empty lines before and after inline code in each function
+    "no-ternary": 0, // allow ? : conditions
+    "class-methods-use-this": 0, // expects no 'this.' when calling method
+    "multiline-ternary": 0, //? : conditions in multiple lines
+    "react/forbid-prop-types": 0, //allows 'object' and vague prop types when defining propTypes
+    "react/forbid-component-props": 0, //allows forbidden property types, eg className
+    "react/no-set-state": 0, // allow set state in read-only components
+    "react/jsx-closing-tag-location": 0, //indentation for closing tags, difficul to mantain considering IDE formating defaults.
+    "react/jsx-closing-bracket-location": 0, //indentation for closing bracket, difficul to mantain considering IDE formating defaults.
+    "react/jsx-no-bind": 0, //bind/arrow functions in properties. Increases garbage collection
+    "react/default-props-match-prop-types": 0, //Property names in PropTypes match children properties
+    "linebreak-style": 0, //enforces consistent line endings independent of operating system, VCS, or editor used across your codebase.
+    "object-shorthand": ["error", "always", { "avoidQuotes": true }] //This applies to all methods (including generators) defined in object literals and any properties defined where the key name matches name of the assigned variable.
+  }
+}
