@@ -1,0 +1,10 @@
+# Ignore all the following patterns during linting #
+
+# Dependency and public directories
+node_modules
+dist
+public
+
+# Webpack config
+webpack.*config.js
+
