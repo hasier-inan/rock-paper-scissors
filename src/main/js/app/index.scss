@@ -1,13 +1,50 @@
 @import "./bootstrap";
 
+$primaryColor: rgba(0, 0, 0, .2);
+$secondaryColor: rgba(0, 0, 0, .1);
+
 .controls-container {
   padding: .5em;
+}
 
-  &__results-table {
-    margin-top: .5em;
+.table-container {
 
-    .results-table__title {
-      font-size: 2em;
+  table {
+    table-layout: fixed;
+    width: 100%;
+
+    tr.even {
+      background-color: $primaryColor;
+    }
+
+    thead tr, tr.odd {
+      background-color: $secondaryColor;
+    }
+
+    thead tr {
+      font-weight: bold;
+    }
+
+    th, td, thead tr {
+      border-color: $secondaryColor;
+      border-style: none solid;
+      border-width: 0 1px;
+      position: relative;
+      text-align: left;
+
+      span {
+        display: block;
+        padding: 10px;
+      }
+    }
+
+    td {
+      font-size: .95rem;
+
+      &:first-child {
+        position: relative;
+      }
     }
   }
+
 }

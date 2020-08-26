@@ -24,8 +24,10 @@ const PlayedRoundTable = (props) => {
         recordCountNamePlural={"rounds"}
         trClassName={(record, index) => index % 2 == 0 ? 'even' : 'odd'}
     />;
-}
+};
+
 export default PlayedRoundTable;
+
 PlayedRoundTable.propTypes = {
     "userResults": PropTypes.arrayOf(PropTypes.shape({
         "player1Hand": PropTypes.string,

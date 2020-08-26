@@ -1,0 +1,58 @@
+{
+  "options": {
+    "merge-default-rules": false,
+    "formatter": "stylish",
+    "max-warnings": 1000
+  },
+  "files": {
+    "include": "**/*.s+(a|c)ss",
+    "ignore": [
+      "node_modules/**/*.*"
+    ]
+  },
+  "rules": {
+    "extends-before-mixins": 2,
+    "extends-before-declarations": 2,
+    "placeholder-in-extend": 2,
+    "mixins-before-declarations": [
+      2,
+      {
+        "exclude": [
+          "breakpoint",
+          "mq",
+          "media-xs",
+          "media-sm",
+          "media-md",
+          "media-lg",
+          "media-xl",
+          "media-xxl"
+        ]
+      }
+    ],
+    "no-warn": 1,
+    "no-debug": 1,
+    "no-ids": 2,
+    "no-important": 2,
+    "hex-notation": [
+      2,
+      {
+        "style": "uppercase"
+      }
+    ],
+    "property-sort-order": [
+      1,
+      {
+        "order": nil,
+        "ignore-custom-properties": true
+      }
+    ],
+    "variable-for-property": [
+      2,
+      {
+        "properties": [
+          "content"
+        ]
+      }
+    ]
+  }
+}

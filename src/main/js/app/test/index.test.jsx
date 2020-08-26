@@ -3,6 +3,7 @@ import Adapter from "enzyme-adapter-react-16";
 import App from "../";
 import React from "react";
 import {assert} from "chai";
+import history from "../history";
 import sinon from "sinon";
 
 configure({"adapter": new Adapter()});
@@ -21,10 +22,10 @@ describe("App", () => {
 
     describe("Component rendering", () => {
 
-        const triggerADummyMessage= ()=>{
-            const message = {"player1Hand": "ROCK", "player2Hand": "ROCK", "gameResult": "DRAW"};
-            app.find("SockJsClient").instance().props.onMessage(message);
-        }
+        const message = {"player1Hand": "ROCK", "player2Hand": "ROCK", "gameResult": "DRAW"},
+            triggerADummyMessage = () => {
+                app.find("SockJsClient").instance().props.onMessage(message);
+            };
 
         it("triggers a new request when new round is clicked", () => {
             app.find(".controls-container__new-round").simulate("click");
@@ -43,6 +44,20 @@ describe("App", () => {
             app.find(".controls-container__reset").simulate("click");
             assert.deepEqual(app.find("PlayedRoundTable").getElement().props.userResults,
                 [], "Expected results table to be updated with no data");
+        });
+
+        it("links to total rounds page", () => {
+            const app = mount(<App/>);
+            history.push('/total-rounds');
+            assert.exists(app.find(".controls-container--total-rounds"),
+                "Expected Total Rounds component to be rendered");
+        });
+
+        it("links to user rounds page", () => {
+            const app = mount(<App/>);
+            history.push('/');
+            assert.exists(app.find(".controls-container--user-rounds"),
+                "Expected User Rounds component to be rendered");
         });
     });
 });
