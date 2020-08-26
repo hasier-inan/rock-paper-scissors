@@ -20,6 +20,8 @@ const PlayedRoundTable = (props) => {
         bottomPagerVisible={false}
         pageSize={Number.MAX_SAFE_INTEGER}
         pageSizes={null}
+        recordCountName={"round"}
+        recordCountNamePlural={"rounds"}
         trClassName={(record, index) => index % 2 == 0 ? 'even' : 'odd'}
     />;
 }
