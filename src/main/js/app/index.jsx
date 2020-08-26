@@ -14,6 +14,10 @@ class App extends Component {
         requestToTopic(`${STOMP_DETAILS.appPrefix}${TOPICS.playRound}`);
     }
 
+    handleSessionReset() {
+        this.setState({"userResults": []});
+    }
+
     handleSockJsMessage(results) {
         let {userResults} = this.state;
         userResults.push(results);
@@ -29,22 +33,32 @@ class App extends Component {
         />;
     }
 
+    renderControls() {
+        return (<React.Fragment>
+            <button
+                className={"btn btn-primary btn-block controls-container__new-round"}
+                onClick={() => this.handleNewRound()}>
+                PLAY ROUND
+            </button>
+            <button
+                className={"btn btn-secondary btn-block controls-container__reset"}
+                onClick={() => this.handleSessionReset()}>
+                RESET
+            </button>
+        </React.Fragment>);
+    }
+
     renderResultsTable() {
         const {userResults} = this.state;
         return (<div className={"controls-container__results-table"}>
             <span className={"results-table__title"}>Rounds Played:</span>
-            <PlayedRoundTable userResults={userResults} />
+            <PlayedRoundTable userResults={userResults}/>
         </div>);
     }
 
     render() {
         return (<div className={"controls-container"}>
-
-                    <button
-                        className={"btn btn-primary btn-block controls-container__new-round"}
-                        onClick={() => this.handleNewRound()}>
-                        PLAY ROUND
-                    </button>
+            {this.renderControls()}
             {this.renderSockJs()}
             {this.renderResultsTable()}
         </div>);
