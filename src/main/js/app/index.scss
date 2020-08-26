@@ -1,0 +1,13 @@
+@import "./bootstrap";
+
+.controls-container {
+  padding: .5em;
+
+  &__results-table {
+    margin-top: .5em;
+
+    .results-table__title {
+      font-size: 2em;
+    }
+  }
+}

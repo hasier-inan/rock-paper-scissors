@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.5.2",
     "react": "^16.4.2",
     "react-devtools": "^3.3.4",
     "react-dom": "^16.4.2",
+    "react-filterable-table": "^0.3.434",
     "react-router-dom": "^4.3.1",
     "react-stomp": "5.0.0",
     "webpack": "^4.17.1",

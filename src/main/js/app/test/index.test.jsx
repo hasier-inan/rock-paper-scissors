@@ -7,7 +7,7 @@ import sinon from "sinon";
 
 configure({"adapter": new Adapter()});
 
-describe.only("App", () => {
+describe("App", () => {
     let app;
     const sockJsClient = {sendMessage: sinon.spy()},
         createDummyClient = () => {
@@ -27,9 +27,11 @@ describe.only("App", () => {
         });
 
         it("handles response when triggered", () => {
-            const message = "aMessage";
+            const message = {"player1Hand": "ROCK", "player2Hand": "ROCK", "gameResult": "DRAW"};
             app.find("SockJsClient").instance().props.onMessage(message);
-            assert.equal(app.instance().state.message, message, "Expected state to be updated with new message");
+            assert.deepEqual(app.find("PlayedRoundTable").getElement().props.userResults,
+                [message], "Expected results table to be updated with new result");
+
         });
     });
 });
