@@ -8,8 +8,9 @@
     "react-devtools": "^3.3.4",
     "react-dom": "^16.4.2",
     "react-filterable-table": "^0.3.434",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "4.3.1",
     "react-stomp": "5.0.0",
+    "sass-lint": "^1.13.1",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.7"
@@ -19,6 +20,7 @@
     "watch": "webpack --watch -d",
     "start": "webpack-dev-server --hot --inline --port 3000 --config ./webpack.preview.config.js",
     "eslint": "eslint --ext .js,.jsx ./src/main/js/",
+    "sasslint": "sass-lint -v -q -i node_modules/**/*.*",
     "test": "nyc --check-coverage --reporter=text mocha ./src/main/js/**/*.test.jsx --opts mocha.opts --timeout 5000 --recursive --require ignore-styles ./src/main/js/setup.test.jsx --exit",
     "report": "nyc report --reporter=html --reporter=lcov"
   },

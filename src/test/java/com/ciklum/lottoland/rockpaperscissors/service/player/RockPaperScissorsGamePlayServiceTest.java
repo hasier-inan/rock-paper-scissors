@@ -3,10 +3,14 @@ package com.ciklum.lottoland.rockpaperscissors.service.player;
 import com.ciklum.lottoland.rockpaperscissors.model.GameResult;
 import com.ciklum.lottoland.rockpaperscissors.model.Hand;
 import com.ciklum.lottoland.rockpaperscissors.model.PlayedRoundResult;
+import com.ciklum.lottoland.rockpaperscissors.model.TotalResults;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.List;
 
 import static com.ciklum.lottoland.rockpaperscissors.model.GameResult.DRAW;
 import static com.ciklum.lottoland.rockpaperscissors.model.GameResult.LOSE;
@@ -52,6 +56,26 @@ public class RockPaperScissorsGamePlayServiceTest {
     @Test
     public void testPlayer1Loses() {
         playRoundWithMockedHandsAndExpectResult(buildExpectedResult(ROCK, PAPER, LOSE));
+    }
+
+    @Test
+    public void testPlayedRoundIsSavedInMemory() {
+        PlayedRoundResult aResult = buildExpectedResult(ROCK, PAPER, LOSE);
+        this.gamePlayService.saveUserRound(aResult);
+        List<PlayedRoundResult> allPlayedRounds = (List<PlayedRoundResult>)
+                ReflectionTestUtils.getField(this.gamePlayService, "allPlayedRounds");
+        assertThat("Expected played round to be saved in memory", allPlayedRounds.get(0), samePropertyValuesAs(aResult));
+    }
+
+    @Test
+    public void testTotalStatsAreRetrievedFromSavedRounds() {
+        this.gamePlayService.saveUserRound(buildExpectedResult(SCISSORS, PAPER, WIN));
+        this.gamePlayService.saveUserRound(buildExpectedResult(ROCK, ROCK, DRAW));
+        this.gamePlayService.saveUserRound(buildExpectedResult(ROCK, PAPER, LOSE));
+        TotalResults expectedResults = new TotalResults(3, 1, 1, 1);
+
+        assertThat("Expected total stats to match", this.gamePlayService.getTotalStats(),
+                samePropertyValuesAs(expectedResults));
     }
 
     private void playRoundWithMockedHandsAndExpectResult(PlayedRoundResult expectedResult) {

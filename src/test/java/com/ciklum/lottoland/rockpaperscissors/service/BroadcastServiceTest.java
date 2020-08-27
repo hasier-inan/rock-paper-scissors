@@ -10,6 +10,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.ciklum.lottoland.rockpaperscissors.config.WebSocketConstants.BROADCAST_PREFIX;
 import static com.ciklum.lottoland.rockpaperscissors.config.WebSocketConstants.BROKER_PREFIX;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -47,5 +48,12 @@ public class BroadcastServiceTest {
         this.broadcastService.sendMessage(new StompPrincipal(userUUID), DUMMY_TOPIC, message);
         verify(this.template, times(1)).convertAndSendToUser(eq(userUUID), eq(BROKER_PREFIX + DUMMY_TOPIC),
                 eq(message));
+    }
+
+    @Test
+    public void testMessageIsBroadcast() {
+        String aMessage = "something";
+        this.broadcastService.broadcastMessage(DUMMY_TOPIC, aMessage);
+        verify(this.template, times(1)).convertAndSend(eq(BROADCAST_PREFIX + BROKER_PREFIX + DUMMY_TOPIC), eq(aMessage));
     }
 }

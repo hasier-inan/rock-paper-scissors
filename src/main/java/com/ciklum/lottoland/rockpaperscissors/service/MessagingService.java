@@ -8,5 +8,5 @@ import java.security.Principal;
 public interface MessagingService {
 
     void sendMessage(Principal user, String topic, Object data);
-
+    void broadcastMessage(String topic, Object data);
 }

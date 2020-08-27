@@ -5,6 +5,11 @@ import SockJsClient from 'react-stomp';
 let sockJsClient;
 
 export const requestToTopic = (topic) => {
+    if (!sockJsClient) {
+        /* istanbul ignore next */
+        setTimeout(() => {requestToTopic(topic)}, 500);
+        return;
+    }
     sockJsClient.sendMessage(topic);
 }
 

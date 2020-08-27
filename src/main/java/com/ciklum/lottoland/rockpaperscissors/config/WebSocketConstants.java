@@ -6,6 +6,7 @@ package com.ciklum.lottoland.rockpaperscissors.config;
 public class WebSocketConstants {
 
     public static final String PLAY_ROUND_ENDPOINT = "/play-round";
+    public static final String TOTAL_ROUNDS_ENDPOINT = "/total-rounds";
     public static final String APP_PREFIX = "/rps";
     public static final String BROKER_PREFIX = "/topic";
     public static final String BROADCAST_PREFIX = "/user";
