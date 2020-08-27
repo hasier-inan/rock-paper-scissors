@@ -11,20 +11,29 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {"userResults": []};
+        this.requestTotalResults();
     }
 
     handleNewRound() {
         requestToTopic(`${STOMP_DETAILS.appPrefix}${TOPICS.playRound}`);
     }
 
+    requestTotalResults() {
+        requestToTopic(`${STOMP_DETAILS.appPrefix}${TOPICS.totalRounds}`);
+    }
+
     handleSessionReset() {
         this.setState({"userResults": []});
     }
 
-    handleSockJsMessage(results) {
-        let {userResults} = this.state;
-        userResults.push(results);
-        this.setState({"userResults": userResults});
+    handleSockJsMessage(results, topic) {
+        let {userResults, totalResults} = this.state;
+        if (topic.includes(TOPICS.playRound)) {
+            userResults.push(results);
+        } else if (topic.includes(TOPICS.totalRounds)) {
+            totalResults = results;
+        }
+        this.setState({"userResults": userResults, "totalResults": totalResults});
     }
 
     renderUserRounds() {
@@ -37,12 +46,15 @@ class App extends Component {
     }
 
     renderTotalRounds() {
+        const {totalResults} = this.state;
         return <TotalRounds
+            totalResults={totalResults}
         />;
     }
 
     render() {
-        const topicNames = [`${STOMP_DETAILS.userPrefix}${STOMP_DETAILS.brokerPrefix}${TOPICS.playRound}`];
+        const topicPrefix = `${STOMP_DETAILS.userPrefix}${STOMP_DETAILS.brokerPrefix}`,
+            topicNames = [`${topicPrefix}${TOPICS.playRound}`, `${topicPrefix}${TOPICS.totalRounds}`];
         return (
             <React.Fragment>
                 <WebSocketClient

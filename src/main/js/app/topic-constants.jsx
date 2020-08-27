@@ -1,5 +1,6 @@
 export const TOPICS = {
-        "playRound": "/play-round"
+        "playRound": "/play-round",
+        "totalRounds": "/total-rounds"
     },
     STOMP_DETAILS = {
         "appPrefix": "/rps",

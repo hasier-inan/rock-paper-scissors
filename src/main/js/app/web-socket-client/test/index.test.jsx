@@ -47,5 +47,16 @@ describe("WebSocketClient", () => {
             assert(sockJsClient.sendMessage.calledOnce, "Expected message to be sent");
             assert.equal(sockJsClient.sendMessage.args[0][0], topic, "Expected request to topic to be made");
         });
+
+        it("sends no message and throws no exception if client is undefined", () => {
+            const sockJsClient = undefined,
+                topic = "aTopic";
+            let comp = mount(<WebSocketClient topics={[topic]}/>);
+            assert.isNotNull(comp.find("SockJsClient").instance().props.sockJsClient,
+                "Expected client reference to be set");
+
+            comp.find("SockJsClient").getElement().ref(sockJsClient);
+            requestToTopic(topic);
+        });
     });
 });
